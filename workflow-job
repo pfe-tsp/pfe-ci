@@ -11,6 +11,8 @@ def maxRetries = 60
 def author = extractUsername()
 def authorParentURL = "https://github.com/${author}/james-parent.git"
 
+def art = "james/parent"
+
 public String extractUsername() {
     return "${repoURL}".split('/')[3];
 }
@@ -103,8 +105,8 @@ flows["${branch}"] = {
         }
         node {
             echo "Building ${buildId}"
-            sh "docker build --tag=${images.jamesCompile} ."
-            sh "docker run --name=${containers.jamesCompile} ${useMavenCache} --volumes-from=${containers.gitPublish} --volume=/destination ${images.jamesCompile} -s ${mergeBranch}"
+            sh "docker build --tag=${art} ."
+            sh "docker run --name=${containers.jamesCompile} ${useMavenCache} --volumes-from=${containers.gitPublish} --volume=/destination ${art} -s ${mergeBranch}"
         }
         node {
             echo "Deploying ${buildId}"
@@ -138,7 +140,6 @@ flows["${branch}"] = {
             deleteContainer(containers.integration)
             deleteContainer(containers.james)
             deleteContainer(containers.gitPublish)
-            deleteImage(images.jamesCompile)
             deleteImage(images.james)
             deleteImage(images.gitPublish)
         }
