@@ -106,7 +106,7 @@ flows["${branch}"] = {
         node {
             echo "Building ${buildId}"
             sh "docker build --tag=${art} ."
-            sh "docker run --name=${containers.jamesCompile} ${useMavenCache} --volumes-from=${containers.gitPublish} --volume=/destination ${art} -s ${mergeBranch}"
+            sh "docker run --name=${containers.jamesCompile} ${useMavenCache} --volumes-from=${containers.gitPublish} --volume=/destination ${art} ${mergeBranch}"
         }
         node {
             echo "Deploying ${buildId}"
