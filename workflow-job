@@ -52,7 +52,7 @@ public class Containers implements Serializable {
 }
 
 def zipPath = '/destination/james-server-app-3.0.0-beta5-SNAPSHOT-app.zip' 
-def keystorePath = '/keys/keystore'
+def keystorePath = '/keystore'
 def jamesCliWithOptions = '/root/james-server-app-3.0.0-beta5-SNAPSHOT/bin/james-cli.sh -h 127.0.0.1 -p 9999'
 def useMavenCache = '--volumes-from maven-cache-deploy'
 
