@@ -26,7 +26,7 @@ configuration = JenkinsLocationConfiguration.get();
 configuration.setUrl(System.getenv("JENKINS_URL"));
 configuration.save();
 
-scm = new GitSCM("https://github.com/linagora/james-jenkins");
+scm = new GitSCM("https://github.com/chibenwa/pfe-ci.git");
 scm.branches = [new BranchSpec("*/master")];
 workflowJob = new WorkflowJob(jenkins, "workflow");
 workflowJob.definition = new CpsScmFlowDefinition(scm, "workflow-job");
@@ -36,7 +36,7 @@ jobName = "create-dsl-job";
 gitTrigger = new SCMTrigger("* * * * *");
 dslBuilder = new ExecuteDslScripts(scriptLocation=new ExecuteDslScripts.ScriptLocation(value = "false", targets="build-github-script", scriptText=""), ignoreExisting=false, removedJobAction=RemovedJobAction.DISABLE);
 dslProject = new hudson.model.FreeStyleProject(jenkins, jobName);
-dslProject.scm = new GitSCM("https://github.com/linagora/james-jenkins.git");
+dslProject.scm = new GitSCM("https://github.com/chibenwa/pfe-ci.git");
 dslProject.scm.branches = [new BranchSpec("*/master")];
 dslProject.addTrigger(gitTrigger);
 dslProject.createTransientActions();
