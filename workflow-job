@@ -119,9 +119,11 @@ flows["${branch}"] = {
             sh "docker run --detach=true --name=${containers.james} --hostname ${hostname} --expose=143 --publish-all=true ${jamesLinks} ${images.james}"
             
             echo 'Waiting for James server to be deployed'
-            waitForCommandSuccess("docker exec ${containers.james} ${jamesCliWithOptions} listusers", maxRetries)
-            sh "docker logs ${containers.james}"
-              
+            try {
+                waitForCommandSuccess("docker exec ${containers.james} ${jamesCliWithOptions} listusers", maxRetries)
+            } finally {
+                sh "docker logs ${containers.james}"
+            } 
         }
         node {
             echo "Configuring James Server"
