@@ -125,14 +125,6 @@ flows["${branch}"] = {
                 sh "docker logs ${containers.james}"
             } 
         }
-        node {
-            echo "Configuring James Server"
-            sh "docker exec ${containers.james} ${jamesCliWithOptions} adddomain domain"
-            sh "docker exec ${containers.james} ${jamesCliWithOptions} adduser imapuser@domain password"
-             
-            echo "Running integration tests on ${buildId}"
-            sh "${findImapPort} && docker run --name=${containers.integration} --entrypoint=\"/root/integration_tests.sh\" ${useMavenCache} ${images.jamesCompile} ${integrationArguments}"
-        }
     } finally {
         node {
             echo "Cleaning ${buildId}"
