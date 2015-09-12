@@ -5,8 +5,8 @@ import java.util.UUID
 // This script must be called with a $branch parameter : branch to build specified
 // This script must be called with a $repoURL parameter : specifies the commiter GitHub repo URL
 
-def dockerIp = '62.210.100.33'
-def hostname = 'james.linagora.com'
+def dockerIp = 'btellier.com'
+def hostname = 'btellier.com'
 def maxRetries = 60
 def author = extractUsername()
 def authorParentURL = "https://github.com/${author}/james-parent.git"
